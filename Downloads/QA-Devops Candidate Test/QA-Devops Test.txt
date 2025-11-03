@@ -1,0 +1,64 @@
+### DevOps Deployment Assignment: Firebase Dart SDK Sample App for Flutter Web
+
+#### Objective:
+Deploy the Sample App with the Firebase Dart SDK for Flutter Web, ensuring a smooth Docker build and local deployment. This setup will eventually support a release to Artifact Registry and Cloud Run.
+
+---
+
+#### Instructions:
+
+A zip folder is included with required depdencies.
+
+1. Navigate to this SDK - https://pub.dev/packages/firebase_dart_admin_auth_sdk
+
+2. Using the sample app (under the folder) **Environment Setup:**
+   - Ensure you can run the Flutter web application locally using:
+     ```bash
+     flutter run -d chrome
+     ```
+     This command should launch the application in a Chrome browser to verify local functionality.
+
+3. **Dockerfile Review:**
+   - Locate and review the Dockerfile located at:
+     ```
+     dartapps\apps\firebase-dart-admin-auth-sdk\Dockerfile  (This is a base server docker file taht works out of the box)
+     ```
+   - Verify that all configurations meet the deployment requirements for a Flutter web application.
+
+4.  We have included a Docker file and a server.dart file as part of this assignment.  You can use as is or update as you need.  Keep in mind simplicity is key.
+
+
+5. **Docker Desktop Setup:**
+   - Open Docker Desktop and ensure it’s ready for image building.
+
+5. **Build Docker Image:**
+   - Execute the following command to build the Docker image for the web app:
+     ```bash
+     docker build --no-cache -t firebase-web-app-demo . > build_output.log 2>&1
+     ```
+     - **Note:** The `build_output.log` will capture all output for debugging. Review this log for any build issues.
+
+6. **Run Docker Container:**
+   - Once the image is successfully built, deploy it locally with:
+     ```bash
+     docker run -p 8080:8080 firebase-web-app-demo > build_output.log 2>&1
+     ```
+     - This step will also output logs to `build_output.log` for further debugging if needed.
+   - Check for any issues in the log output and document errors or warnings encountered.
+
+7. **Verify Local Deployment:**
+   - Access the application locally at `http://localhost:8080`.
+   - Confirm that the `server.dart` file located at:
+     ```
+     dartapps\apps\firebase-dart-admin-auth-sdk\example\firebase-dart-admin-auth-sdk-sample-app\bin\server.dart
+     ```
+     is serving the application correctly.
+
+8. **Next Steps (Upon Successful Deployment):**
+   - If the local deployment succeeds, connect with **@alphabetacreatives** for guidance on publishing the Docker image to Google’s Artifact Registry and deploying it on Cloud Run.
+
+#### Additional Notes:
+- Be mindful of the due date and keep detailed notes on each step, especially any deviations or issues encountered.
+- Ensure all outputs are logged in `build_output.log` for easy debugging and future reference.
+
+Good luck, and reach out for any clarification needed.
